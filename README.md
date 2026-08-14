@@ -34,7 +34,36 @@ is why the repo isn't set up as a single npm/bun workspace.
    npm install
    ```
 
-## Running
+## Database (Postgres via Docker)
+
+Boot Postgres only (useful when running the server locally outside Docker, e.g. via `npm run dev`):
+
+```bash
+docker compose up postgres -d
+```
+
+Then, from `server/`, apply migrations and seed some local test data:
+
+```bash
+cd server
+npm run db:migrate
+npm run db:seed
+```
+
+Other useful commands (run from `server/`):
+- `npm run db:generate` — after changing `src/db/schema.ts`, generates a new SQL migration file
+- `npm run db:studio` — opens Drizzle Studio to browse the DB in a UI
+
+To run **everything** (Postgres + Server) in Docker:
+
+```bash
+docker compose up --build
+```
+
+The server container's entrypoint runs migrations automatically before starting, so a fresh
+`docker compose up` on a clean volume ends up migrated with no manual step.
+
+## Running (app dev servers)
 
 From the repo root, boot both dev servers at once:
 
@@ -42,13 +71,16 @@ From the repo root, boot both dev servers at once:
 npm run dev
 ```
 
-- Server: `http://localhost:4000` (health check at `/health`)
+- Server: `http://localhost:4000` (health check at `/health` — also reports DB connectivity)
 - Client: `http://localhost:3000`
 
 Or run either individually: `npm run dev:server` / `npm run dev:client`.
 
-> Postgres isn't wired in yet — that's Chapter 2. Right now `npm run dev` is enough to verify the
-> Client can reach the Server (the home page shows a live server-connection status).
+## Production notes
+
+Postgres is self-hosted (no managed DB service) — backups are entirely our responsibility. A
+`pg_dump` cron job shipping off-box is planned as part of Chapter 13 (deployment); don't consider
+production data safe until that's actually running and a restore has been tested at least once.
 
 ## Conventions
 

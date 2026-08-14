@@ -7,6 +7,7 @@ import { apiFetch } from "@/lib/api";
 interface HealthPayload {
   healthy: boolean;
   uptime: number;
+  db: "connected" | "unreachable";
 }
 
 export function ServerStatus() {
@@ -34,7 +35,7 @@ export function ServerStatus() {
 
   return (
     <p className="text-sm text-emerald-600 dark:text-emerald-400">
-      Server connected — uptime {Math.round(data.uptime)}s
+      Server connected — uptime {Math.round(data.uptime)}s — DB {data.db}
     </p>
   );
 }
