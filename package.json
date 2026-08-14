@@ -5,9 +5,9 @@
     "dev": "concurrently -n server,client -c blue,magenta \"npm --prefix server run dev\" \"bun --cwd client run dev\"",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "bun --cwd client run dev",
-    "typecheck": "npm --prefix server run typecheck && bun --cwd client run typecheck",
-    "lint": "npm --prefix server run lint && bun --cwd client run lint",
-    "format": "npm --prefix server run format && bun --cwd client run format"
+    "typecheck": "npm --prefix server run typecheck && bun run --cwd client run typecheck",
+    "lint": "npm --prefix server run lint && bun run --cwd client run lint",
+    "format": "npm --prefix server run format && bun run --cwd client format"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"

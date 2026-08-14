@@ -8,6 +8,7 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]).default("info"),
   // Comma-separated list of allowed origins for CORS, e.g. "http://localhost:3000,https://astroapp.com"
   CLIENT_URL: z.string().default("http://localhost:3000"),
+  DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
 });
 
 const parsed = envSchema.safeParse(process.env);

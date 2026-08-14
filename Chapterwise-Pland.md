@@ -5,7 +5,7 @@
 
 ---
 
-## Chapter 1: Project Initialization 🔲
+## Chapter 1: Project Initialization ✅
 
 **Goal:** A running skeleton — Client and Server boot, talk to each other, and are containerized, before any real feature work starts.
 
@@ -21,7 +21,7 @@
 
 ---
 
-## Chapter 2: Database, ORM & Docker Setup 🔲
+## Chapter 2: Database, ORM & Docker Setup ✅
 
 **Goal:** Postgres running in Docker (same setup locally and on the Hostinger box), Drizzle wired up, first migration applied.
 
@@ -117,7 +117,7 @@
 
 **Goal:** The core differentiator. LLM chat that answers using real chart data via tool calls — never freelancing astrological claims.
 
-- 8.1 Tool definitions the LLM can call: e.g. `getChart(profileId)`, `getCurrentDasha(profileId)`, `getTransits(date)`, `getMatchScore(profileIdA, profileIdB)` — design tool *return schemas* to only expose the granularity your methodology actually supports (period/theme level, not day-level predictions — per our earlier discussion)
+- 8.1 Tool definitions the LLM can call: e.g. `getChart(profileId)`, `getCurrentDasha(profileId)`, `getTransits(date)`, `getMatchScore(profileIdA, profileIdB)` — design tool _return schemas_ to only expose the granularity your methodology actually supports (period/theme level, not day-level predictions — per our earlier discussion)
 - 8.2 System prompt design: explicit instruction that every astrological claim must trace back to a tool result; no claim without backing data
 - 8.3 Precision-mismatch handling: when a user asks for finer granularity than tools support (e.g. "what happens to me tomorrow"), the model reframes to the nearest supported granularity rather than inventing detail (the "trap query" pattern discussed earlier)
 - 8.4 Conversation persistence: `chat_sessions` / `chat_messages` tables, tied to user + profile
