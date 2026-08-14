@@ -4,8 +4,10 @@ import { z } from "zod";
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
-  PORT: z.coerce.number().int().positive().default(3000),
+  PORT: z.coerce.number().int().positive().default(4000),
   LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]).default("info"),
+  // Comma-separated list of allowed origins for CORS, e.g. "http://localhost:3000,https://astroapp.com"
+  CLIENT_URL: z.string().default("http://localhost:3000"),
 });
 
 const parsed = envSchema.safeParse(process.env);

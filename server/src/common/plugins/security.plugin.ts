@@ -3,6 +3,8 @@ import helmet from "@fastify/helmet";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
+import { env } from "../config/env.js";
+
 /**
  * Registers baseline security middleware (helmet + cors).
  * Wrapped with fastify-plugin so it attaches to the parent scope
@@ -10,8 +12,10 @@ import fp from "fastify-plugin";
  */
 export default fp(
   async function securityPlugin(fastify: FastifyInstance) {
+    const allowedOrigins = env.CLIENT_URL.split(",").map((origin) => origin.trim());
+
     await fastify.register(helmet);
-    await fastify.register(cors, { origin: true });
+    await fastify.register(cors, { origin: allowedOrigins });
   },
   { name: "security-plugin" },
 );
