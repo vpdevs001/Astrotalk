@@ -16,6 +16,7 @@ is why the repo isn't set up as a single npm/bun workspace.
 ## Local setup
 
 1. **Server**
+
    ```bash
    cd server
    cp .env.example .env
@@ -23,6 +24,7 @@ is why the repo isn't set up as a single npm/bun workspace.
    ```
 
 2. **Client**
+
    ```bash
    cd client
    cp .env.example .env.local
@@ -51,6 +53,7 @@ npm run db:seed
 ```
 
 Other useful commands (run from `server/`):
+
 - `npm run db:generate` — after changing `src/db/schema.ts`, generates a new SQL migration file
 - `npm run db:studio` — opens Drizzle Studio to browse the DB in a UI
 
